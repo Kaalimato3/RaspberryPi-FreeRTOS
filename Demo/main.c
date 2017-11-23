@@ -14,7 +14,6 @@
 #include "video.h"
 #include "FreeRTOS_IP.h"
 #include "FreeRTOS_Sockets.h"
-#include "screenTestTask.h"
 
 //Only for debug, normally should not 
 //   include private header
@@ -53,6 +52,15 @@ void taskBrake() {
 
 void taskClutch() {
 	task(CLUTCH_LED_GPIO, CLUTCH_TASK_DELAY);
+}
+
+void screenTestTask()
+{
+    println("abcdefghijklmnopqrstuvwxyz");
+    println("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    println("0123456789");
+	println("{|}~`_^]["\"@?><=:;/.-,+*)('&\%$#\"!");
+	while(1);
 }
 
 #undef CREATE_SOCK_TASK
