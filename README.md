@@ -9,7 +9,7 @@ https://github.com/Forty-Tw0/RaspberryPi-FreeRTOS
 
 1. Clone this repository:
 
-   ```git clone https://github.com/rooperl/RaspberryPi-FreeRTOS```
+   ```git clone https://github.com/Kaalimato3/RaspberryPi-FreeRTOS```
 
 2. Use the deploy script to build a kernel image file:
 
