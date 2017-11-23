@@ -7,8 +7,8 @@
 #include <mailbox.h>
 #include <5x5_font.h>
 char loaded = 0;
-#define CHAR_WIDTH 12
-#define CHAR_HEIGHT 16
+#define CHAR_WIDTH 24
+#define CHAR_HEIGHT 32
 int SCREEN_WIDTH;
 int SCREEN_HEIGHT;
 
