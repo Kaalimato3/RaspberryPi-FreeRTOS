@@ -14,6 +14,7 @@
 #include "video.h"
 #include "FreeRTOS_IP.h"
 #include "FreeRTOS_Sockets.h"
+#include "screenTestTask.h"
 
 //Only for debug, normally should not 
 //   include private header
@@ -23,7 +24,7 @@
 #define BRAKE_LED_GPIO 		24
 #define CLUTCH_LED_GPIO 	25
 
-#define ACCELERATE_TASK_DELAY 	4000
+#define ACCELERATE_TASK_DELAY 	1000
 #define BRAKE_TASK_DELAY 		2000
 #define CLUTCH_TASK_DELAY 		5000
 
@@ -320,7 +321,9 @@ int main(void) {
 	FreeRTOS_IPInit(ucIPAddress, ucNetMask, ucGatewayAddress, ucDNSServerAddress, ucMACAddress);
 
 	//xTaskCreate(serverTask, "server", 128, NULL, 0, NULL);
-	xTaskCreate(serverListenTask, "server", 128, NULL, 0, NULL);
+	//xTaskCreate(serverListenTask, "server", 128, NULL, 0, NULL);
+
+	xTaskCreate(screenTestTask, "screen_test", 0, NULL, 0, NULL);
 
 	xTaskCreate(taskAccelerate, "LED_A", 128, NULL, 0, NULL);
 	xTaskCreate(taskBrake, "LED_B", 128, NULL, 0, NULL);
@@ -329,7 +332,7 @@ int main(void) {
 	//set to 0 for no debug, 1 for debug, or 2 for GCC instrumentation (if enabled in config)
 	loaded = 1;
 
-	println("Starting task scheduler", GREEN_TEXT);
+	//println("Starting task scheduler", GREEN_TEXT);
 
 	vTaskStartScheduler();
 
