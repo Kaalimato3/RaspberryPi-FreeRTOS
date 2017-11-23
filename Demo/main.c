@@ -56,10 +56,10 @@ void taskClutch() {
 
 void screenTestTask()
 {
-    println("abcdefghijklmnopqrstuvwxyz");
-    println("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    println("0123456789");
-	println("{|}~`_^]["\"@?><=:;/.-,+*)('&\%$#\"!");
+    println("abcdefghijklmnopqrstuvwxyz", WHITE_TEXT);
+    println("ABCDEFGHIJKLMNOPQRSTUVWXYZ", WHITE_TEXT);
+    println("0123456789", WHITE_TEXT);
+	println("{|}~`_^]["\"@?><=:;/.-,+*)('&\%$#\"!", WHITE_TEXT);
 	while(1);
 }
 
