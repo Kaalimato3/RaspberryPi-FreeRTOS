@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3.5
 
 import os, sys
 import prettyformat
