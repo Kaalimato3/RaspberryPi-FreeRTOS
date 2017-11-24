@@ -56,7 +56,7 @@ void taskClutch() {
 
 void screenTestTask()
 {
-	println("A");
+	println("A", WHITE_TEXT);
 	/*0123456
 	//      
 	//1   1 
