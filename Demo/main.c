@@ -57,16 +57,21 @@ void taskClutch() {
 void screenTestTask()
 {
 	println(" ", WHITE_TEXT);
-	println("       A", WHITE_TEXT);
-	/*0123456
-	//      
-	//1   1 
-	//11111 
-	//1   1 
-	//1   1 
-	//11111 
-	//      
-	*/      
+	println(" ", WHITE_TEXT);
+	println(" ", WHITE_TEXT);
+	println(" ", WHITE_TEXT);
+	println(" ", WHITE_TEXT);
+	println("       A A A A A A A A A", WHITE_TEXT);
+	/*Character A
+	//0123456
+	//      //MSB
+	//1   1 //
+	//11111 //
+	//1   1 //
+	//1   1 //
+	//11111 //
+	//      //
+	*/      //LSB
     //println("abcdefghijklmnopqrstuvwxyz", WHITE_TEXT);
     //println("ABCDEFGHIJKLMNOPQRSTUVWXYZ", WHITE_TEXT);
     //println("0123456789", WHITE_TEXT);

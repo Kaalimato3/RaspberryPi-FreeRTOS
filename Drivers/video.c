@@ -129,15 +129,14 @@ void drawChar(unsigned char c, int x, int y, int colour){
 		c -= ' ';
 	}
 
+	
+
 	//draw pixels of the character
 	for (j = 0; j < CHAR_WIDTH; j++) {
 		for (i = 0; i < CHAR_HEIGHT; i++) {
 			//unsigned char temp = font[c][j];
 			if (font[c][j] & (1<<i)) {
-				for(z = 0; z < FONT_SIZE; z++)
-				{
-					framebuffer[(y + i) * SCREEN_WIDTH + (x + j)] = colour;
-				}
+				framebuffer[(y + i) * SCREEN_WIDTH + (x + j)] = colour;
 			}
 		}
 	}
