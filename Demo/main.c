@@ -56,10 +56,20 @@ void taskClutch() {
 
 void screenTestTask()
 {
-    println("abcdefghijklmnopqrstuvwxyz", WHITE_TEXT);
-    println("ABCDEFGHIJKLMNOPQRSTUVWXYZ", WHITE_TEXT);
-    println("0123456789", WHITE_TEXT);
-	println("{|}~`_^][\\@?><=:;/.-,+*)('&%$#\"!", WHITE_TEXT);
+	println("A");
+	/*0123456
+	//      
+	//1   1 
+	//11111 
+	//1   1 
+	//1   1 
+	//11111 
+	//      
+	*/      
+    //println("abcdefghijklmnopqrstuvwxyz", WHITE_TEXT);
+    //println("ABCDEFGHIJKLMNOPQRSTUVWXYZ", WHITE_TEXT);
+    //println("0123456789", WHITE_TEXT);
+	//println("{|}~`_^][\\@?><=:;/.-,+*)('&%$#\"!", WHITE_TEXT);
 	while(1);
 }
 
@@ -326,7 +336,7 @@ int main(void) {
 	const unsigned char ucDNSServerAddress[ 4 ] = {10, 10, 206, 1};
 	//const unsigned char ucMACAddress[ 6 ] = {0xB8, 0x27, 0xEB, 0x19, 0xAD, 0xA7};
 	const unsigned char ucMACAddress[ 6 ] = {0xB8, 0x27, 0xEB, 0xA0, 0xE8, 0x54};
-	FreeRTOS_IPInit(ucIPAddress, ucNetMask, ucGatewayAddress, ucDNSServerAddress, ucMACAddress);
+	//FreeRTOS_IPInit(ucIPAddress, ucNetMask, ucGatewayAddress, ucDNSServerAddress, ucMACAddress);
 
 	//xTaskCreate(serverTask, "server", 128, NULL, 0, NULL);
 	//xTaskCreate(serverListenTask, "server", 128, NULL, 0, NULL);
