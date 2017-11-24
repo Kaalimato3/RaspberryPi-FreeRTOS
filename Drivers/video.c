@@ -7,7 +7,7 @@
 #include <mailbox.h>
 #include <5x5_font.h>
 char loaded = 0;
-#define FONT_SIZE 7
+#define FONT_SIZE 2
 #define CHAR_WIDTH 6
 #define CHAR_HEIGHT 8
 int SCREEN_WIDTH;
@@ -132,10 +132,10 @@ void drawChar(unsigned char c, int x, int y, int colour){
 	
 
 	//draw pixels of the character
-	for (j = 0; j < CHAR_WIDTH; j++) {
-		for (i = 0; i < CHAR_HEIGHT; i++) {
+	for (j = 0; j < CHAR_WIDTH * FONT_SIZE; j++) {
+		for (i = 0; i < CHAR_HEIGHT * FONT_SIZE; i++) {
 			//unsigned char temp = font[c][j];
-			if (font[c][j] & (1<<i)) {
+			if (font[c][j/2] & (1<<i/2)) {
 				framebuffer[(y + i) * SCREEN_WIDTH + (x + j)] = colour;
 			}
 		}
