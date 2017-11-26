@@ -33,14 +33,14 @@ void ethernetPollTask(){
 	for( ;; ){
 		//send any waiting packets first
 		for(int i = 0; i < uxQueueMessagesWaiting(xOutputQueue); i++){
-println("try send", 0xFF0000cc);
+// println("try send", 0xFF0000cc);
 			OutputInfo out;
 			xQueueReceive(xOutputQueue, &out, 1000);
 			NetworkBufferDescriptor_t * const pxDescriptor = (NetworkBufferDescriptor_t*)out.pNetworkBufferDescriptor_t;
 			//for(int i = 0; i < pxDescriptor->xDataLength; i++){printHex("", ((char*)pxDescriptor->pucEthernetBuffer)[i], 0xFFFFFFFF);}
 			USPiSendFrame((void *)pxDescriptor->pucEthernetBuffer, pxDescriptor->xDataLength);
 			if(out.bReleaseAfterSend) vReleaseNetworkBufferAndDescriptor( pxDescriptor );
-println("sent", 0xFF0000cc);
+// println("sent", 0xFF0000cc);
 		}
 
 		/* If pxNextNetworkBufferDescriptor was not left pointing at a valid
@@ -69,8 +69,8 @@ println("sent", 0xFF0000cc);
 			/* No data from the hardware. */
 			continue;//break;
 		}
-printHex("Frame received ", ulReceiveCount, 0xFFFFFFFF);
-if(ulReceiveCount != 0x3c) for(int i = 0; i < ulReceiveCount; i++){printHex("", ((char*)pucUseBuffer)[i], 0xFFFFFFFF);}
+// printHex("Frame received ", ulReceiveCount, 0xFFFFFFFF);
+// if(ulReceiveCount != 0x3c) for(int i = 0; i < ulReceiveCount; i++){printHex("", ((char*)pucUseBuffer)[i], 0xFFFFFFFF);}
 		if( pxNextNetworkBufferDescriptor == NULL )
 		{
 			/* Data was read from the hardware, but no descriptor was available

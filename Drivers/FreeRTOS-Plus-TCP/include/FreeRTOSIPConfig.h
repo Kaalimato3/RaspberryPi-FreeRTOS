@@ -60,8 +60,8 @@
 
 #include <mem.h>
 
-#define FreeRTOS_debug_print = 1
-#define FreeRTOS_debug_printf( MSG ) println(MSG, 0xFFFFFFFF);
+#define FreeRTOS_debug_print = 0
+// #define FreeRTOS_debug_printf( MSG ) println(MSG, 0xFFFFFFFF);
 
 /*Optional: ipconfigPACKET_FILLER_SIZE This option is a bit tricky:
 it makes sure that all 32-bit fields in the network packets are 32-bit aligned.
