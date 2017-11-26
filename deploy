@@ -1,5 +1,4 @@
 make clean
 make
-mkdir -p SD_Example
-rm -f SD_Example/kernel7.img
-cp kernel7.img SD_Example/
+rm /media/simo/FREERTOS/kernel7.img
+cp -f kernel7.img /media/simo/FREERTOS
