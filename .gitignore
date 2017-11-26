@@ -3,3 +3,4 @@ kernel.list
 kernel.map
 kernel.syms
 build/
+deploy

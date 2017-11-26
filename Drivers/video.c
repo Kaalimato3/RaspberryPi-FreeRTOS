@@ -7,6 +7,7 @@
 #include <mailbox.h>
 #include <5x5_font.h>
 char loaded = 0;
+#define FONT_SIZE 3
 #define CHAR_WIDTH 6
 #define CHAR_HEIGHT 8
 int SCREEN_WIDTH;
@@ -46,8 +47,8 @@ void initFB(){
 		attempts++;
 	}*/
 
-	SCREEN_WIDTH = 1920;//mailbuffer[5];
-	SCREEN_HEIGHT = 1080;//mailbuffer[6];
+	SCREEN_WIDTH = 1280;//mailbuffer[5];
+	SCREEN_HEIGHT = 720;//mailbuffer[6];
 
 	mailbuffer[0] = 22 * 4;		//mail buffer size
 	mailbuffer[1] = 0;		//response code
@@ -118,7 +119,7 @@ void drawRect(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2
 //	1				1	0
 __attribute__((no_instrument_function))
 void drawChar(unsigned char c, int x, int y, int colour){
-	int i, j;
+	int i, j, s, f;
 
 	//convert the character to an index
 	c = c & 0x7F;
@@ -129,12 +130,15 @@ void drawChar(unsigned char c, int x, int y, int colour){
 	}
 
 	//draw pixels of the character
-	for (j = 0; j < CHAR_WIDTH; j++) {
-		for (i = 0; i < CHAR_HEIGHT; i++) {
+	for (j = 0; j < CHAR_WIDTH; j++) 
+	{
+		for (i = 0; i < CHAR_HEIGHT; i++) 
+		{
 			//unsigned char temp = font[c][j];
-			if (font[c][j] & (1<<i)) {
-				framebuffer[(y + i) * SCREEN_WIDTH + (x + j)] = colour;
-			}
+			if (font[c][j] & (1<<i)) 
+			{
+				framebuffer[(y + i * FONT_SIZE) * SCREEN_WIDTH + (x + j * FONT_SIZE)] = colour;
+			}	
 		}
 	}
 }
@@ -143,7 +147,7 @@ __attribute__((no_instrument_function))
 void drawString(const char* str, int x, int y, int colour){
 	while (*str) {
 		drawChar(*str++, x, y, colour);
-		x += CHAR_WIDTH; 
+		x += CHAR_WIDTH * FONT_SIZE; 
 	}
 }
 
@@ -159,7 +163,7 @@ void println(const char* message, int colour){
 	if(s_bWereEnabled) __asm volatile ("cpsid i" : : : "memory");
 
 	drawString(message, position_x, position_y, colour);
-	position_y = position_y + CHAR_HEIGHT + 1;
+	position_y = position_y + CHAR_HEIGHT * FONT_SIZE + 1;
 	if(position_y >= SCREEN_HEIGHT){
 		if(position_x + 2 * (SCREEN_WIDTH / 8) > SCREEN_WIDTH){
 
@@ -209,10 +213,20 @@ void videotest(){
 	//This loop turns on every pixel the screen size allows for.
 	//If the shaded area is larger or smaller than your screen, 
 	//you have under/over scan issues. Add disable_overscan=1 to your config.txt
-	for(int x = 0; x < SCREEN_WIDTH * SCREEN_HEIGHT; x++){
-		framebuffer[x] = 0xFF111111;
+	//for(int x = 0; x < SCREEN_WIDTH * SCREEN_HEIGHT; x++){
+	//	framebuffer[x] = 0xFF111111;
+	//}
+	
+	//Draws a line starting from the upper left corner
+	for(int x = 0; x < SCREEN_WIDTH; x++)
+	{
+		for (int y = 0; y < SCREEN_HEIGHT; y++)
+		{
+			if (x == y)
+				framebuffer[y * SCREEN_WIDTH + x] = 0xFFFF00FF;
+		}
 	}
 
 	//division crashes the system here but not in other places it seems?
-	drawString("Forty-Two", SCREEN_WIDTH / 2 - 4.5 * CHAR_WIDTH, SCREEN_HEIGHT / 2 + CHAR_HEIGHT / 2, 0xFF00FF00);
+	//drawString("Forty-Two", SCREEN_WIDTH / 2 - 4.5 * CHAR_WIDTH, SCREEN_HEIGHT / 2 + CHAR_HEIGHT / 2, 0xFF00FF00);
 }

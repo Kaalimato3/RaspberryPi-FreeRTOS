@@ -54,6 +54,31 @@ void taskClutch() {
 	task(CLUTCH_LED_GPIO, CLUTCH_TASK_DELAY);
 }
 
+void taskScreenTest()
+{
+	/*println(" ", WHITE_TEXT);
+	println(" ", WHITE_TEXT);
+	println(" ", WHITE_TEXT);
+	println(" ", WHITE_TEXT);
+	println(" ", WHITE_TEXT);
+	println("       A A A A A A A A A", WHITE_TEXT);*/
+	/*Character A
+	//0123456
+	//      //MSB
+	//1   1 //
+	//11111 //
+	//1   1 //
+	//1   1 //
+	//11111 //
+	//      //
+	*/      //LSB
+    println("a b c d e f g h i j k l m n o p q r s t u v w x y z", BLUE_TEXT);
+    println("A B C D E F G H I J K L M N O P Q R S T U V W X Y Z", GREEN_TEXT);
+    println("0 1 2 3 4 5 6 7 8 9", RED_TEXT);
+	println("{ | } ~ ` _ ^ ] [ \\ @ ? > < = : ; / . - , + * ) ( ' & % $ # \" ! ", ORANGE_TEXT);
+	while(1);
+}
+
 #undef CREATE_SOCK_TASK
 // #define CREATE_SOCK_TASK
 #define tcpechoSHUTDOWN_DELAY	( pdMS_TO_TICKS( 5000 ) )
@@ -320,7 +345,10 @@ int main(void) {
 	FreeRTOS_IPInit(ucIPAddress, ucNetMask, ucGatewayAddress, ucDNSServerAddress, ucMACAddress);
 
 	//xTaskCreate(serverTask, "server", 128, NULL, 0, NULL);
-	xTaskCreate(serverListenTask, "server", 128, NULL, 0, NULL);
+	//xTaskCreate(serverListenTask, "server", 128, NULL, 0, NULL);
+
+	xTaskCreate(taskScreenTest, "screenTest", 128, NULL, 0, NULL);
+
 
 	xTaskCreate(taskAccelerate, "LED_A", 128, NULL, 0, NULL);
 	xTaskCreate(taskBrake, "LED_B", 128, NULL, 0, NULL);
