@@ -4,3 +4,5 @@ kernel.map
 kernel.syms
 build/
 deploy
+.dbuild/pretty/prettyformat.pyc
+kernel7.img

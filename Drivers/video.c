@@ -137,7 +137,13 @@ void drawChar(unsigned char c, int x, int y, int colour){
 			//unsigned char temp = font[c][j];
 			if (font[c][j] & (1<<i)) 
 			{
-				framebuffer[(y + i * FONT_SIZE) * SCREEN_WIDTH + (x + j * FONT_SIZE)] = colour;
+				for(int h = 0; h < FONT_SIZE; h++)
+				{
+					for(int v = 0; v < FONT_SIZE; v++)
+					{
+						framebuffer[(y + i * FONT_SIZE + v) * SCREEN_WIDTH + (x + j * FONT_SIZE + h)] = colour;
+					}
+				}
 			}	
 		}
 	}
