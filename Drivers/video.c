@@ -119,7 +119,7 @@ void drawRect(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2
 //	1				1	0
 __attribute__((no_instrument_function))
 void drawChar(unsigned char c, int x, int y, int colour){
-	int i, j, s, f;
+	int i, j, z;
 
 	//convert the character to an index
 	c = c & 0x7F;
@@ -128,6 +128,8 @@ void drawChar(unsigned char c, int x, int y, int colour){
 	} else {
 		c -= ' ';
 	}
+
+	
 
 	//draw pixels of the character
 	for (j = 0; j < CHAR_WIDTH; j++) 
