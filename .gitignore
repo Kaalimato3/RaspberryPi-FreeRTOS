@@ -4,3 +4,4 @@ kernel.map
 kernel.syms
 build/
 deploy
+deploy
