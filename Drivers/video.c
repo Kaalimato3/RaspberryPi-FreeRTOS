@@ -7,7 +7,7 @@
 #include <mailbox.h>
 #include <5x5_font.h>
 char loaded = 0;
-#define FONT_SIZE 3
+#define FONT_SIZE 2
 #define CHAR_WIDTH 6
 #define CHAR_HEIGHT 8
 int SCREEN_WIDTH;
@@ -119,7 +119,7 @@ void drawRect(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2
 //	1				1	0
 __attribute__((no_instrument_function))
 void drawChar(unsigned char c, int x, int y, int colour){
-	int i, j, z;
+	int i, j, z, tempcolor;
 
 	//convert the character to an index
 	c = c & 0x7F;
@@ -139,8 +139,15 @@ void drawChar(unsigned char c, int x, int y, int colour){
 			//unsigned char temp = font[c][j];
 			if (font[c][j] & (1<<i)) 
 			{
-				framebuffer[(y + i * FONT_SIZE) * SCREEN_WIDTH + (x + j * FONT_SIZE)] = colour;
-			}	
+				for(int h = 0; h < FONT_SIZE; h++)
+				{
+					for(int v = 0; v < FONT_SIZE; v++)
+					{
+						framebuffer[(y + i * FONT_SIZE + v) * SCREEN_WIDTH + (x + j * FONT_SIZE + h)] = colour;
+						framebuffer[(y + i * FONT_SIZE + v + 1) * SCREEN_WIDTH + (x + j * FONT_SIZE + h + 1)] = 0xFF777777;
+					}
+				}
+			}
 		}
 	}
 }

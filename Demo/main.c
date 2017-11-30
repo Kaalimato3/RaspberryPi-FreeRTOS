@@ -26,7 +26,9 @@
 #define ACCELERATE_LED_GPIO 23
 #define BRAKE_LED_GPIO 24
 #define CLUTCH_LED_GPIO 25
-#define BUTTON_PIN 
+#define BUTTON_LED 18
+#define BUTTON_PIN 12
+#define BUTTON_PIN_GROUND 16
 
 #define ACCELERATE_TASK_DELAY 	1000
 #define BRAKE_TASK_DELAY 		2000
@@ -71,6 +73,29 @@ void taskBrake()
 void taskClutch()
 {
     task(CLUTCH_LED_GPIO, CLUTCH_TASK_DELAY);
+}
+
+void buttonTask()
+{
+    int button = 1;
+    while(1)
+    {
+        if(button != ReadGpio(BUTTON_PIN))
+        {
+            if (!ReadGpio(BUTTON_PIN))
+                println("Nappi painettu!", GREEN_TEXT);
+            vTaskDelay(25);
+        }
+        button = ReadGpio(BUTTON_PIN);
+        if(button > 0)
+        {
+            SetGpio(BUTTON_LED, 0);
+        }
+        else{
+            SetGpio(BUTTON_LED, 1);
+        }
+        
+    }
 }
 
 uint8_t* intToString(unsigned n) {
@@ -310,15 +335,19 @@ void serverLoop()
 
 int main(void)
 {
-    SetGpioFunction(ACCELERATE_LED_GPIO, 1);
+    SetGpioFunction(ACCELERATE_LED_GPIO, 1); // 1 = GPIO_OUT
     SetGpioFunction(BRAKE_LED_GPIO, 1);
     SetGpioFunction(CLUTCH_LED_GPIO, 1);
+    SetGpioFunction(BUTTON_LED, 1);
+    SetGpioFunction(BUTTON_PIN, 0); // 0 = GPIO_IN
 
     initFB();
 
     SetGpio(ACCELERATE_LED_GPIO, 1);
     SetGpio(BRAKE_LED_GPIO, 1);
     SetGpio(CLUTCH_LED_GPIO, 1);
+    SetGpio(BUTTON_LED, 1);
+    SetGpio(BUTTON_PIN, 1);
 
     DisableInterrupts();
     InitInterruptController();
@@ -345,6 +374,7 @@ int main(void)
     xTaskCreate(taskAccelerate, "LED_A", 128, NULL, 0, NULL);
     xTaskCreate(taskBrake, "LED_B", 128, NULL, 0, NULL);
     xTaskCreate(taskClutch, "LED_C", 128, NULL, 0, NULL);
+    xTaskCreate(buttonTask, "LED_C", 128, NULL, 0, NULL);
 
     //set to 0 for no debug, 1 for debug, or 2 for GCC instrumentation (if enabled in config)
     loaded = 1;
